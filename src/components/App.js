@@ -10,14 +10,33 @@ class App extends Component {
     super();
     this.state = {
       myName: 'Sumit Kumar Singh',
-      authorName: 'Ray Villalobos'
+      authorName: 'Ray Villalobos',
+      myAppointments: [],
+      lastIndex: 0
     }
+  }
+
+  componentDidMount() {
+    fetch('./data.json')
+      .then(response => response.json())
+      .then(result => {
+        const apts = result.map(item => {
+          item.aptId = this.state.lastIndex;
+          this.setState({ lastIndex: this.state.lastIndex + 1 });
+          return item;
+        });
+        this.setState({
+          myAppointments: apts
+        });
+      });
   }
 
   render() {
     const nameStyle = {
       float: 'right',
     }
+
+
     return (
       <main className="page bg-white" id="petratings">
         <div className="container">
@@ -30,8 +49,8 @@ class App extends Component {
                 </div>
 
                 <AddAppointments />
-                <ListAppointments />
                 <SearchAppointments />
+                <ListAppointments toChildApts={this.state.myAppointments} />
               </div>
             </div>
           </div>
