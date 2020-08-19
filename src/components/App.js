@@ -97,6 +97,10 @@ class App extends Component {
       float: 'right',
     }
 
+    const subStyle = {
+      float: 'left',
+    }
+
     let order;
     let filteredApts = this.state.myAppointments;
     if (this.state.orderDir === 'asc') {
@@ -129,10 +133,16 @@ class App extends Component {
             <div className="col-md-12 bg-white">
               <div className="container">
                 <br />
+
+                <div style={subStyle}>
+                  <h4>Wisdom Pet Medicine</h4>
+                </div>
+
                 <div style={nameStyle}>
                   Practice build by : <b>{this.state.myName}</b><br />
                   Original Credits: <b>{this.state.authorName}</b>
                 </div>
+
                 <br /><br />
                 <hr></hr>
 
